@@ -15,5 +15,8 @@ admin.site.register(Report)
 admin.site.register(Interests)
 
 
+# cd appserver
+# python manage.py runserver 5455
+
 
 

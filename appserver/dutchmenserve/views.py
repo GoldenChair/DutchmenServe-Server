@@ -16,7 +16,7 @@ from .serializers import InterestSerializer
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world. You're at the dutchmanserve index.")
+    return HttpResponse("Hello, world. You're at the dutchmenserve index.")
 
 ## EVENTS
 
@@ -41,7 +41,6 @@ def event_view(request):
 #Get specific event and edit events, which includes editting the delete
 @api_view(['GET', 'PUT'])#Tested and PUT can just take in the altered field
 def specific_event_view(request, pk, format = None):
-    #return HttpResponse("Hello, world. You're at the dutchmanserve index.")
     try:
         event_post = Event.objects.get(id = pk)
     except Event.DoesNotExist:
@@ -62,7 +61,6 @@ def specific_event_view(request, pk, format = None):
 #Get all organizations or create a new one
 @api_view(['GET', 'POST'])#tested
 def org_view(request):
-    #return HttpResponse("Hello, world. You're at the dutchmanserve index.")
     try:
         org_post = Organization.objects.all()
     except Organization.DoesNotExist:
@@ -82,7 +80,6 @@ def org_view(request):
 #Get specific org
 @api_view(['GET', 'PUT'])#Edit or get a specific org including editting the delete, tested
 def specific_org_view(request, pk, format = None):
-    #return HttpResponse("Hello, world. You're at the dutchmanserve index.")
     try:
         org_post = Organization.objects.get(id = pk)
     except Organization.DoesNotExist:
@@ -103,7 +100,6 @@ def specific_org_view(request, pk, format = None):
 ##Get all users or create a new one
 @api_view(['GET', 'POST'])
 def users_view(request):
-    #return HttpResponse("Hello, world. You're at the dutchmanserve index.")
     try:
         user_post = User.objects.all()
     except User.DoesNotExist:
@@ -123,7 +119,6 @@ def users_view(request):
 #Fetch a specific user
 @api_view(['GET', 'PUT'])#Tested
 def specific_users_view(request,pk,format = None):
-    #return HttpResponse("Hello, world. You're at the dutchmanserve index.")
     try:
         user_post = User.objects.get(id = pk)
     except User.DoesNotExist:
@@ -146,7 +141,6 @@ def specific_users_view(request,pk,format = None):
 ##GET all reports or add a new one
 @api_view(['GET', 'POST'])
 def reports_view(request):
-    #return HttpResponse("Hello, world. You're at the dutchmanserve index.")
     try:
         report_post = Report.objects.all()
     except Report.DoesNotExist:
