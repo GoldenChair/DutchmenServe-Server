@@ -29,7 +29,7 @@ urlpatterns = [
     #report
     path('reports', views.reports_view,name='reports'),
     path('report/<int:pk>/', views.specific_report_view,name='specific report'),
-    #interests
+    #interest
     path('interests', views.interest_view,name='get all or create a new interest'),
     path('interest/<int:pk>', views.specific_interest,name='get, edit, or delete a specific interest'),
 

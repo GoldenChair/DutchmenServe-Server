@@ -3,7 +3,7 @@ from .models import Event
 from .models import Organization
 from .models import User
 from .models import Report
-from .models import Interests
+from .models import Interest
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,5 +27,5 @@ class ReportSerializer(serializers.ModelSerializer):
 
 class InterestSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Interests
+        model = Interest
         fields = '__all__'

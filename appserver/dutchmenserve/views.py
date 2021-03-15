@@ -11,7 +11,7 @@ from .models import User
 from .serializers import UserSerializer
 from .models import Report
 from .serializers import ReportSerializer
-from .models import Interests
+from .models import Interest
 from .serializers import InterestSerializer
 
 # Create your views here.
@@ -175,12 +175,12 @@ def specific_report_view(request, pk, format = None):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-##Interests
-@api_view(['GET','POST'])##Get all the interests or create a new one
+##Interest
+@api_view(['GET','POST'])##Get all the interest or create a new one
 def interest_view(request, format = None):
     try:
-        interest_item = Interests.objects.all()
-    except Interests.DoesNotExist:
+        interest_item = Interest.objects.all()
+    except Interest.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
     if request.method == 'GET':
@@ -197,8 +197,8 @@ def interest_view(request, format = None):
 @api_view(['GET', 'PUT', 'DELETE'])
 def specific_interest(request, pk, format = None):
     try:
-        int_item = Interests.objects.get(id = pk)
-    except Interests.DoesNotExist:
+        int_item = Interest.objects.get(id = pk)
+    except Interest.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     #Get a specific report
     if request.method == 'GET':
