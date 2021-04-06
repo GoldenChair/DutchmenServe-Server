@@ -4,6 +4,7 @@ from .models import Organization
 from .models import User
 from .models import Report
 from .models import Interest
+from .models import Registration
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,4 +29,10 @@ class ReportSerializer(serializers.ModelSerializer):
 class InterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interest
+        fields = '__all__'
+
+
+class RegistrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Registration
         fields = '__all__'

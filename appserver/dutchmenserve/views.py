@@ -13,6 +13,8 @@ from .models import Report
 from .serializers import ReportSerializer
 from .models import Interest
 from .serializers import InterestSerializer
+from .models import Registration
+from .serializers import RegistrationSerializer
 
 # Create your views here.
 def index(request):
@@ -40,7 +42,7 @@ def event_view(request):
     
 #Get specific event and edit events, which includes editting the delete
 @api_view(['GET', 'PUT'])#Tested and PUT can just take in the altered field
-def specific_event_view(request, pk, format = None):
+def specific_event_view(request, pk):
     try:
         event_post = Event.objects.get(id = pk)
     except Event.DoesNotExist:
@@ -56,6 +58,43 @@ def specific_event_view(request, pk, format = None):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+#get all the users registered for an event, or register user for event
+@api_view(['GET'])
+def registered_view(request, eid):
+    try:
+        registrants = User.objects.filter(registration__event__id = eid)
+    except Registration.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = UserSerializer(registrants, many = True)
+        return Response(serializer.data)
+
+
+#register user for event
+@api_view(['PUT'])
+def register_view(request, eid, uid):
+    try:
+        event_put = Event.objects.get(id = eid)
+        user_put = User.objects.get(id = uid)
+    except (Event.DoesNotExist or User.DoesNotExist) :
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    # if request.method == 'PUT':
+    #     serializer = RegistrationSerializer(event_put, user_put, data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    if request.method == 'PUT':
+        newRegistration = Registration(user = user_put, event = event_put)
+        newRegistration.save()
+        return Response(True, status=status.HTTP_201_CREATED)
+
 
 ###ORGANIZATIONS
 #Get all organizations or create a new one
@@ -79,7 +118,7 @@ def org_view(request):
 
 #Get specific org
 @api_view(['GET', 'PUT'])#Edit or get a specific org including editting the delete, tested
-def specific_org_view(request, pk, format = None):
+def specific_org_view(request, pk):
     try:
         org_post = Organization.objects.get(id = pk)
     except Organization.DoesNotExist:
@@ -118,7 +157,7 @@ def users_view(request):
 
 #Fetch a specific user
 @api_view(['GET', 'PUT'])#Tested
-def specific_users_view(request,pk,format = None):
+def specific_users_view(request,pk):
     try:
         user_post = User.objects.get(id = pk)
     except User.DoesNotExist:
@@ -158,7 +197,7 @@ def reports_view(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 #Get specific report or edit a report
 @api_view(['GET', 'PUT'])
-def specific_report_view(request, pk, format = None):
+def specific_report_view(request, pk):
     try:
         report_post = Report.objects.get(id = pk)
     except Report.DoesNotExist:
@@ -177,7 +216,7 @@ def specific_report_view(request, pk, format = None):
 
 ##Interest
 @api_view(['GET','POST'])##Get all the interest or create a new one
-def interest_view(request, format = None):
+def interest_view(request):
     try:
         interest_item = Interest.objects.all()
     except Interest.DoesNotExist:
@@ -195,7 +234,7 @@ def interest_view(request, format = None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def specific_interest(request, pk, format = None):
+def specific_interest(request, pk):
     try:
         int_item = Interest.objects.get(id = pk)
     except Interest.DoesNotExist:
