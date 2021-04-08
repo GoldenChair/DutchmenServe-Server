@@ -33,6 +33,20 @@ class InterestSerializer(serializers.ModelSerializer):
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
+    # user = UserSerializer()
+    # event = EventSerializer()
+    # success = serializers.BooleanField()
+
+    # def create(self, validated_data):
+    #     return Registration.objects.create(**validated_data)
+
+    # def update(self, instance, validated_data):
+    #     instance.user = validated_data.get('user', instance.user)
+    #     instance.event = validated_data.get('event', instance.event)
+    #     instance.success = validated_data.get('success', instance.success)
+    #     instance.save()
+    #     return instance
+
     class Meta:
         model = Registration
         fields = '__all__'
