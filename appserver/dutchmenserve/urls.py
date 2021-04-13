@@ -9,7 +9,7 @@ urlpatterns = [
     path('events', views.event_view,name='get all events'),
     path('event/<int:pk>', views.specific_event_view,name='get one event'),
     path('event/<int:eid>/register', views.registered_view, name='get list of registered for event'),
-    path('event/<int:eid>/register/<int:uid>', views.register_view, name='post person for event'),
+    path('event/<int:eid>/register/<int:uid>', views.register_view, name='post person for event or delete'),
     #org
     path('orgs', views.org_view,name='all orgs'),
     path('org/<int:pk>', views.specific_org_view,name='one org'),

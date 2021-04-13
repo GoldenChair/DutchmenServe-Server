@@ -83,3 +83,5 @@ class Leadership(models.Model):
 class Registration(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     event = models.ForeignKey(Event, null=True, on_delete=models.SET_NULL)
+    class Meta:
+        unique_together = ['user', 'event']

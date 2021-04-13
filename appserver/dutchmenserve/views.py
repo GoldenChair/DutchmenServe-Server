@@ -80,7 +80,6 @@ def register_view(request, eid, uid):
     try:
         event_post = Event.objects.get(id = eid)
         user_post = User.objects.get(id = uid)
-        del_reg = Registration.objects.filter(event__id = eid, user__id = uid)
     except Event.DoesNotExist or User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -96,9 +95,8 @@ def register_view(request, eid, uid):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
-        del_reg.delete()
+        Registration.objects.filter(event__id = eid, user__id = uid).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 
 ###ORGANIZATIONS
