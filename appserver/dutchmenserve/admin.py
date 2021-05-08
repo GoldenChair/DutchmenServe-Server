@@ -18,7 +18,7 @@ admin.site.register(Registration)
 
 # cd appserver
 # python manage.py runserver 5455  #localhost or emulator
-# python manage.py runserver 10.2.204.108:5455  #computer
+# python manage.py runserver 10.2.194.102:5455  #computer
 
 # python manage.py migrate
 # python manage.py makemigrations dutchmenserve  -- tell Django you made changes to models

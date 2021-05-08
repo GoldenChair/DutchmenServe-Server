@@ -5,6 +5,9 @@ from django.db import models
 
 class Interest(models.Model):  #add id
     interest = models.CharField(max_length = 30)
+    iconDataConstant = models.IntegerField()
+    color = models.CharField(max_length=10)
+    fillColor = models.CharField(max_length=10)
     
     def __str__(self):
         return self.interest

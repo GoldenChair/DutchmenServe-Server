@@ -204,6 +204,19 @@ def specific_report_view(request, pk):
     serializer = ReportSerializer(report_post, many = False)
     return Response(serializer.data)
 
+
+#Get all reports for a user
+@api_view(['GET'])
+def all_reports_user(request, pk):
+    try: 
+        reports_for_user = Report.objects.filter(user = pk)
+    except Report.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = ReportSerializer(reports_for_user, many=True)
+    return Response(serializer.data)
+
+
 ##Interest
 @api_view(['GET','POST'])
 def interest_view(request):
