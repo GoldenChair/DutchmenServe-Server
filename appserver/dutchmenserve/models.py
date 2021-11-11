@@ -2,6 +2,45 @@ from django.db import models
 
 # Create your models here.
 
+#LVC Server Project/ Event on app
+class Project(models.Model):
+    id = models.AutoField(primary_key=True)
+    projectName = models.CharField(max_length=100)
+    active = models.BooleanField()
+    approved = models.CharField(max_length=20)
+    createdDate = models.DateTimeField('Date', null = True)
+    reviewDate = models.DateTimeField('Date', null = True)
+
+#LVC Server Group/ Organization on app
+class Group(models.Model):
+    id = models.AutoField(primary_key=True)
+    groupName = models.CharField(max_length=100)
+    active = models.BooleanField()
+    createdDate = models.DateTimeField('Date', null = True)
+    reviewDate = models.DateTimeField('Date', null = True)
+    groupType = models.CharField(max_length=25)
+    approved = models.CharField(max_length=20)
+    subGroup = models.CharField(max_length=50)
+
+#LVC Student Reporting Log/ Report on app
+# groupid and communityOrgid is thee same
+class StudentReportingLog(models.Model):
+    id = models.AutoField(primary_key=True)
+    projectId = models.IntegerField()
+    #Shouldn't need with projectId
+    #projectName = models.CharField(max_length = 100)
+    groupId= models.IntegerField()
+    studentId = models.IntegerField()
+    hoursReported = models.DecimalField(decimal_places=2, max_digits=5)
+    serviceDate = models.DateTimeField('Date', null = True)
+    approved = models.CharField(max_length=20)
+    description = models.TextField(max_length=500)
+    residentialStatusEligible = models.BooleanField()
+    #Shouldn't need because of studentID
+    #username = models.CharField(max_length=20)
+
+
+
 
 class Interest(models.Model):  #add id
     interest = models.CharField(max_length = 30)
