@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 #LVC Server Project/ Event on app
-class Project(models.Model):
+class csProjects11112021(models.Model):
     id = models.AutoField(primary_key=True)
     projectName = models.CharField(max_length=100)
     active = models.BooleanField()
@@ -12,7 +12,7 @@ class Project(models.Model):
     reviewDate = models.DateTimeField('Date', null = True)
 
 #LVC Server Group/ Organization on app
-class Group(models.Model):
+class csGroups11112021(models.Model):
     id = models.AutoField(primary_key=True)
     groupName = models.CharField(max_length=100)
     active = models.BooleanField()
@@ -24,7 +24,7 @@ class Group(models.Model):
 
 #LVC Student Reporting Log/ Report on app
 # groupid and communityOrgid is thee same
-class StudentReportingLog(models.Model):
+class StudentReportingLog11112021(models.Model):
     id = models.AutoField(primary_key=True)
     projectId = models.IntegerField()
     #Shouldn't need with projectId

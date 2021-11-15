@@ -6,25 +6,25 @@ from .models import Report
 from .models import Interest
 from .models import Registration
 #testing ones
-from .models import Project
-from .models import Group
-from .models import StudentReportingLog
+from .models import csProjects11112021
+from .models import csGroups11112021
+from .models import StudentReportingLog11112021
 
 #testing one
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Project
+        model = csProjects11112021
         fields = '__all__'
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Group
+        model = csGroups11112021
         fields = '__all__'
 
 
 class StudentReportingLogSerializer(serializers.ModelSerializer):
     class Meta:
-        model = StudentReportingLog
+        model = StudentReportingLog11112021
         fields = '__all__'
 #End of tesing ones
 class EventSerializer(serializers.ModelSerializer):
