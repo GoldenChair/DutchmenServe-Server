@@ -1,73 +1,73 @@
 from rest_framework import serializers
-from .models import Event
-from .models import Organization
-from .models import User
-from .models import Report
-from .models import Interest
-from .models import Registration
+# from .models import Event
+# from .models import Organization
+# from .models import User
+# from .models import Report
+# from .models import Interest
+# from .models import Registration
 #testing ones
-from .models import csProjects11112021
-from .models import csGroups11112021
-from .models import StudentReportingLog11112021
+from .models import Csprojects11112021
+from .models import Csgroups11112021
+from .models import Studentreportinglog11112021
 
 #testing one
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
-        model = csProjects11112021
+        model = Csprojects11112021
         fields = '__all__'
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
-        model = csGroups11112021
+        model = Csgroups11112021
         fields = '__all__'
 
 
 class StudentReportingLogSerializer(serializers.ModelSerializer):
     class Meta:
-        model = StudentReportingLog11112021
+        model = Studentreportinglog11112021
         fields = '__all__'
 #End of tesing ones
-class EventSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Event
-        fields = '__all__'
+# class EventSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Event
+#         fields = '__all__'
 
-class OrganizationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Organization
-        fields = '__all__'
+# class OrganizationSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Organization
+#         fields = '__all__'
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = '__all__'
+# # class UserSerializer(serializers.ModelSerializer):
+# #     class Meta:
+# #         model = User
+# #         fields = '__all__'
 
-class ReportSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Report
-        fields = '__all__'
+# class ReportSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Report
+#         fields = '__all__'
 
-class InterestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Interest
-        fields = '__all__'
+# # class InterestSerializer(serializers.ModelSerializer):
+# #     class Meta:
+# #         model = Interest
+# #         fields = '__all__'
 
 
-class RegistrationSerializer(serializers.ModelSerializer):
-    # user = UserSerializer()
-    # event = EventSerializer()
-    # success = serializers.BooleanField()
+# class RegistrationSerializer(serializers.ModelSerializer):
+#     # user = UserSerializer()
+#     # event = EventSerializer()
+#     # success = serializers.BooleanField()
 
-    # def create(self, validated_data):
-    #     return Registration.objects.create(**validated_data)
+#     # def create(self, validated_data):
+#     #     return Registration.objects.create(**validated_data)
 
-    # def update(self, instance, validated_data):
-    #     instance.user = validated_data.get('user', instance.user)
-    #     instance.event = validated_data.get('event', instance.event)
-    #     instance.success = validated_data.get('success', instance.success)
-    #     instance.save()
-    #     return instance
+#     # def update(self, instance, validated_data):
+#     #     instance.user = validated_data.get('user', instance.user)
+#     #     instance.event = validated_data.get('event', instance.event)
+#     #     instance.success = validated_data.get('success', instance.success)
+#     #     instance.save()
+#     #     return instance
 
-    class Meta:
-        model = Registration
-        fields = '__all__'
+#     class Meta:
+#         model = Registration
+#         fields = '__all__'
