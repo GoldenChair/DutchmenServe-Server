@@ -54,7 +54,7 @@ def event_view(request):
 @api_view(['GET', 'PUT'])#Tested and PUT can just take in the altered field
 def specific_event_view(request, pk):
     try:
-        event_post = Csprojects11112021.objects.get(id = pk)
+        event_post = Csprojects11112021.objects.get(projectid = pk)
     except Csprojects11112021.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
@@ -91,7 +91,7 @@ def org_view(request):
 @api_view(['GET', 'PUT'])
 def specific_org_view(request, pk):
     try:
-        org_post = Csgroups11112021.objects.get(id = pk)
+        org_post = Csgroups11112021.objects.get(groupid = pk)
     except Csgroups11112021.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
@@ -126,7 +126,7 @@ def reports_view(request):
 @api_view(['GET', 'PUT'])
 def specific_report_view(request, pk):
     try:
-        report_post = Studentreportinglog11112021.objects.get(id = pk)
+        report_post = Studentreportinglog11112021.objects.get(logid = pk)
     except Studentreportinglog11112021.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
