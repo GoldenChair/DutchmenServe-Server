@@ -5,10 +5,16 @@ from rest_framework import serializers
 # from .models import Report
 # from .models import Interest
 # from .models import Registration
-#testing ones
+# testing ones
 from .models import Csprojects11112021
 from .models import Csgroups11112021
 from .models import Studentreportinglog11112021
+# new models
+# from .models import GroupInterests
+from .models import Interests
+# from .models import UserInterests
+# from .models import UserGroups
+from .models import Users
 
 #testing one
 class ProjectSerializer(serializers.ModelSerializer):
@@ -27,6 +33,34 @@ class StudentReportingLogSerializer(serializers.ModelSerializer):
         model = Studentreportinglog11112021
         fields = '__all__'
 #End of tesing ones
+
+# New Models
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields = '__all__'
+
+# class UserGroupSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = UserGroups
+#         fields = '__all__'
+
+# class UsersInterestSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = UserInterests
+#         fields = '__all__'
+
+# class GroupInterestSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = GroupInterests
+#         fields = '__all__'
+
+class InterestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Interests
+        fields = '__all__'
+
 # class EventSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Event

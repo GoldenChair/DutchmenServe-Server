@@ -8,8 +8,8 @@ from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 # from .models import Event
 # from .serializers import EventSerializer
-from .models import Csgroups11112021
-from .serializers import GroupSerializer
+from .models import Csgroups11112021, Interests, Users
+from .serializers import GroupSerializer, InterestSerializer, UserSerializer
 from .models import Csprojects11112021
 from .serializers import ProjectSerializer
 from .models import Studentreportinglog11112021
@@ -151,6 +151,80 @@ def all_reports_user(request, pk):
     serializer = StudentReportingLogSerializer(reports_for_user, many=True)
     return Response(serializer.data)
 
+## interests
+
+#Get all interests or post new one
+@api_view(['GET', 'POST'])
+def interests_view(request):
+    try:
+        interests = Interests.objects.all()
+    except Interests.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'POST':
+        serializer = InterestSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    serializer = InterestSerializer(interests, many = True)
+    return Response(serializer.data)
+
+#Get interests for a user or post a new interest for a user
+#TODO
+# @api_view(['GET', 'PUT'])
+# def specific_interest(request, pk):
+#     try:
+#         User = Users.objects.get(id = pk)
+#     except InterestSerializer.DoesNotExist:
+#         return Response(status=status.HTTP_404_NOT_FOUND)
+
+#     if request.method == 'PUT':
+#         serializer = InterestSerializer(report_post,data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     serializer = InterestSerializer(report_post, many = False)
+#     return Response(serializer.data)
+
+## GET all users/ add a new user
+#TODO not working
+@api_view(['GET', 'POST'])#Tested
+def users_view(request):
+    try:
+        user_post = Users.objects.all()
+    except Users.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+        
+    if request.method == 'POST':
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    serializer = Users(user_post, many = True)
+    return Response(serializer.data)
+
+#Get specific user and edit user
+#TODO needs testing with put
+@api_view(['GET', 'PUT'])
+def specific_users_view(request, pk):
+    try:
+        user_post = Users.objects.get(id = pk)
+    except Users.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    #PUT method to update 
+    if request.method == 'PUT':
+        serializer = UserSerializer(user_post,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #GET by default
+    serializer = UserSerializer(user_post, many = False)
+    return Response(serializer.data)
 
 ## EVENTS
 

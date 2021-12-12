@@ -2,6 +2,17 @@ from django.db import models
 
 # Create your models here.
 
+#Needs to be high up in code for relationships
+class Interests(models.Model):
+    name = models.CharField(max_length=30, blank=True, null=True)
+
+    class Meta:
+        db_table = 'interests'
+
+    def __str__(self):
+        return self.name
+
+
 #LVC Server Project/ Event on app
 class Csprojects11112021(models.Model):
     projectid = models.AutoField(db_column='projectID',primary_key=True)  # Field name made lowercase.
@@ -10,9 +21,10 @@ class Csprojects11112021(models.Model):
     active = models.BooleanField(blank=True, null=True)
     approved = models.CharField(max_length=1, blank=True, null=True)
     reviewdate = models.DateTimeField(db_column='reviewDate', blank=True, null=True)  # Field name made lowercase.
+    description = models.TextField(blank=True, null=True)
+    eventdate = models.DateTimeField(db_column='eventDate', blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'csProjects11112021'
 
 #LVC Server Group/ Organization on app
@@ -25,10 +37,12 @@ class Csgroups11112021(models.Model):
     subgroup = models.CharField(db_column='subGroup', max_length=50, blank=True, null=True)  # Field name made lowercase.
     approved = models.CharField(max_length=1, blank=True, null=True)
     reviewdate = models.DateTimeField(db_column='reviewDate', blank=True, null=True)  # Field name made lowercase.
-
+    interests = models.ManyToManyField(Interests)
     class Meta:
-        managed = False
         db_table = 'csGroups11112021'
+
+    def __str__(self):
+        return self.username
 
 #LVC Student Reporting Log/ Report on app
 # groupid and communityOrgid is thee same
@@ -49,8 +63,49 @@ class Studentreportinglog11112021(models.Model):
     residentialstatuseligible = models.BooleanField(db_column='ResidentialStatusEligible', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'StudentReportingLog11112021'
+
+#New tablesadded
+class Users(models.Model):
+    username = models.CharField(max_length=20, blank=True, null=True)
+    token = models.CharField(max_length=4096, blank=True, null=True)
+    interests = models.ManyToManyField(Interests)
+    groups = models.ManyToManyField(Csgroups11112021)
+    class Meta:
+        db_table = 'users'
+
+    def __str__(self):
+        return self.username
+
+# class GroupInterest(models.Model):
+#     id = models.AutoField()
+#     group_id = models.IntegerField(blank=True, null=True)
+#     interests = models.ForeignKey('Interests', models.DO_NOTHING, blank=True, null=True)
+
+#     class Meta:
+#         managed = False
+#         db_table = 'group_interests'
+
+
+
+# class UserGroup(models.Model):
+#     user_id = models.IntegerField(blank=True, null=True)
+#     group = models.ForeignKey(Csgroups11112021, models.DO_NOTHING, blank=True, null=True)
+
+#     class Meta:
+#         managed = False
+#         db_table = 'user_groups'
+
+
+# class UserInterest(models.Model):
+#     user = models.ForeignKey('Users', models.DO_NOTHING)
+#     interests = models.ForeignKey(Interest, models.DO_NOTHING)
+
+#     class Meta:
+#         managed = False
+#         db_table = 'user_interests'
+
+
 
 # class Interest(models.Model):  #add id
 #     interest = models.CharField(max_length = 30)
