@@ -37,7 +37,7 @@ class Csgroups11112021(models.Model):
     subgroup = models.CharField(db_column='subGroup', max_length=50, blank=True, null=True)  # Field name made lowercase.
     approved = models.CharField(max_length=1, blank=True, null=True)
     reviewdate = models.DateTimeField(db_column='reviewDate', blank=True, null=True)  # Field name made lowercase.
-    interests = models.ManyToManyField(Interests)
+    interests = models.ManyToManyField(Interests, null=True)
     class Meta:
         db_table = 'csGroups11112021'
 
@@ -69,8 +69,8 @@ class Studentreportinglog11112021(models.Model):
 class Users(models.Model):
     username = models.CharField(max_length=20, blank=True, null=True)
     token = models.CharField(max_length=4096, blank=True, null=True)
-    interests = models.ManyToManyField(Interests)
-    groups = models.ManyToManyField(Csgroups11112021)
+    interests = models.ManyToManyField(Interests, null=True)
+    groups = models.ManyToManyField(Csgroups11112021, null=True)
     class Meta:
         db_table = 'users'
 

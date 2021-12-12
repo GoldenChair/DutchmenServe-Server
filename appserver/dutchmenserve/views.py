@@ -139,7 +139,7 @@ def specific_report_view(request, pk):
     serializer = StudentReportingLogSerializer(report_post, many = False)
     return Response(serializer.data)
 
-
+## Users
 #Get all reports for a user
 @api_view(['GET'])
 def all_reports_user(request, pk):
@@ -151,11 +151,48 @@ def all_reports_user(request, pk):
     serializer = StudentReportingLogSerializer(reports_for_user, many=True)
     return Response(serializer.data)
 
+# GET all users/ add a new user
+#TODO test post
+@api_view(['GET', 'POST'])
+def users_view(request):
+    try:
+        user_post = Users.objects.all()
+    except Users.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'POST':
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    serializer = UserSerializer(user_post, many = True)
+    return Response(serializer.data)
+
+#Get specific user and edit user
+#When PUTing a user, you need to pass whole user, basically replace user with updated self
+@api_view(['GET', 'PUT'])
+def specific_users_view(request, pk):
+    try:
+        user_post = Users.objects.filter(id = pk)
+    except Users.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    #PUT method to update 
+    if request.method == 'PUT':
+        serializer = UserSerializer(user_post,data=request.data, allow_null=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #GET by default
+    serializer = UserSerializer(user_post, many = True)
+    return Response(serializer.data)
+
 ## interests
 
 #Get all interests or post new one
 @api_view(['GET', 'POST'])
-#TODO test posting 
 def interests_view(request):
     try:
         interests = Interests.objects.all()
@@ -174,43 +211,7 @@ def interests_view(request):
 #Get interests for a user or post a new interest for a user
 #TODO 
 
-## GET all users/ add a new user
-#TODO getting all users produces error, need to diagnose why and fix
-@api_view(['GET', 'POST'])#Tested
-def users_view(request):
-    try:
-        user_post = Users.objects.all()
-    except Users.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-        
-    if request.method == 'POST':
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    serializer = Users(user_post, many = True)
-    return Response(serializer.data)
 
-#Get specific user and edit user
-#TODO needs testing with put
-@api_view(['GET', 'PUT'])
-def specific_users_view(request, pk):
-    try:
-        user_post = Users.objects.get(id = pk)
-    except Users.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    
-    #PUT method to update 
-    if request.method == 'PUT':
-        serializer = UserSerializer(user_post,data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    #GET by default
-    serializer = UserSerializer(user_post, many = False)
-    return Response(serializer.data)
 
 ## EVENTS
 
