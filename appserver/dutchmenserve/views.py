@@ -155,6 +155,7 @@ def all_reports_user(request, pk):
 
 #Get all interests or post new one
 @api_view(['GET', 'POST'])
+#TODO test posting 
 def interests_view(request):
     try:
         interests = Interests.objects.all()
@@ -171,25 +172,10 @@ def interests_view(request):
     return Response(serializer.data)
 
 #Get interests for a user or post a new interest for a user
-#TODO
-# @api_view(['GET', 'PUT'])
-# def specific_interest(request, pk):
-#     try:
-#         User = Users.objects.get(id = pk)
-#     except InterestSerializer.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-
-#     if request.method == 'PUT':
-#         serializer = InterestSerializer(report_post,data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#     serializer = InterestSerializer(report_post, many = False)
-#     return Response(serializer.data)
+#TODO 
 
 ## GET all users/ add a new user
-#TODO not working
+#TODO getting all users produces error, need to diagnose why and fix
 @api_view(['GET', 'POST'])#Tested
 def users_view(request):
     try:
