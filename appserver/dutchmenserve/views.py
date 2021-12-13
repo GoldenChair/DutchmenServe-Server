@@ -144,7 +144,7 @@ def specific_report_view(request, pk):
 @api_view(['GET'])
 def all_reports_user(request, pk):
     try: 
-        reports_for_user = Studentreportinglog11112021.objects.filter(user = pk)
+        reports_for_user = Studentreportinglog11112021.objects.filter(studentid = pk)
     except Studentreportinglog11112021.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     

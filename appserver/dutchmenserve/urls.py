@@ -17,6 +17,7 @@ urlpatterns = [
     # #user
     path('users', views.users_view,name='all users'),
     path('users/<int:pk>', views.specific_users_view,name='update user'),
+    path('users/<int:pk>/reports', views.all_reports_user,name='reports for user'),
     # path('users/<int:pk>/reports', views.all_reports_user, name='all reports for a user'),
     #report
     path('reports', views.reports_view,name='reports'),
