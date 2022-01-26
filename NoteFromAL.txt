@@ -23,6 +23,7 @@ To run the server: on whatever port you want, here it's arbitrarily 5455
 # cd appserver
 # python manage.py runserver 5455  #localhost or emulator
 # python manage.py runserver 10.2.196.121:5455  #computer, update with ip
+# Also make sure to update ALLOWED_HOSTS in settings.py with it aswell
 
 If you change the models, you have to migrate changes (google for more info)
 # python manage.py migrate
